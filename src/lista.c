@@ -12,6 +12,15 @@ Lista criar_lista()
     return NULL;
 }
 
+void liberar_lista(Lista l)
+{
+    if(l == NULL)
+        return;
+
+    liberar_lista(l->prox);
+    free(l);
+}
+
 Lista insere(Lista l, int info)
 {
     if(l == NULL){

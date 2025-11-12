@@ -1,11 +1,15 @@
 #ifndef LISTA_ENCADEADA_H_INCLUDED
 #define LISTA_ENCADEADA_H_INCLUDED
 
-typedef enum{true = 1, false = 0}boolean;
+#include <stdio.h>
+
+typedef enum{true = 1, false = 0}bool;
 
 typedef struct lista* Lista;
 
 Lista criar_lista();
+
+void liberar_lista(Lista);
 
 Lista insere(Lista, int);
 

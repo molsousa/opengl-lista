@@ -1,14 +1,7 @@
 #include <windows.h>
 #include <gl/gl.h>
-#define ZERO 0.0f
-#define MIN -0.2f
-#define MAX 0.2f
-#define MAX_DEP 0.1f
-#define MIN_DEP -0.1f
-#define POS_REL 1.1
-#define MOD_MIN 0.09
-#define SEC_MOD_MIN 0.05
-#define TER_MOD_MIN 0.01
+#include "include/lista.h"
+#include "include/util.h"
 
 LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);
 void EnableOpenGL(HWND hwnd, HDC*, HGLRC*);
@@ -89,7 +82,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
             glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            float m[8][3] = {
+            double m[8][3] = {
                 {MIN*1.5, MAX, MIN_DEP},
                 {MIN*1.5, MIN, MIN_DEP},
                 {MAX*1.5, MIN, MIN_DEP},
@@ -102,111 +95,21 @@ int WINAPI WinMain(HINSTANCE hInstance,
             };
 
             glPushMatrix();
-            glRotatef(theta, 1.0f, 1.0f, 0.0f);
+            glRotatef(theta, .0f, .0f, 0.0f);
 
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3fv(m[0]);
-            glVertex3fv(m[1]);
-            glVertex3fv(m[2]);
-            glVertex3fv(m[3]);
-
-            glEnd();
-
-
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3fv(m[4]);
-            glVertex3fv(m[5]);
-            glVertex3fv(m[6]);
-            glVertex3fv(m[7]);
-
-            glEnd();
-
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3fv(m[0]);
-            glVertex3fv(m[1]);
-            glVertex3fv(m[5]);
-            glVertex3fv(m[6]);
-
-            glEnd();
-
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3fv(m[3]);
-            glVertex3fv(m[2]);
-            glVertex3fv(m[4]);
-            glVertex3fv(m[7]);
-
-            glEnd();
-
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3f(MAX, MIN, MIN_DEP);
-            glVertex3f(MAX, MAX, MIN_DEP);
-            glVertex3f(MAX, MAX, MAX_DEP);
-            glVertex3f(MAX, MIN, MAX_DEP);
-
-            glEnd();
-
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3f(MAX, MIN, MIN_DEP);
-            glVertex3f(MAX, MAX, MIN_DEP);
-            glVertex3f(MAX, MAX, MAX_DEP);
-            glVertex3f(MAX, MIN, MAX_DEP);
-
-            glEnd();
-
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3f(MAX*3, MIN+MOD_MIN, MAX_DEP-SEC_MOD_MIN);
-            glVertex3f(MAX*3, MIN+MOD_MIN, MIN_DEP+SEC_MOD_MIN);
-            glVertex3f(MAX*4, ZERO, ZERO);
-
-            glEnd();
-
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3f(MAX*3, MAX-MOD_MIN, MAX_DEP-SEC_MOD_MIN);
-            glVertex3f(MAX*3, MAX-MOD_MIN, MIN_DEP+SEC_MOD_MIN);
-            glVertex3f(MAX*4, ZERO, ZERO);
-
-            glEnd();
-
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3f(MAX*3, MAX-MOD_MIN, MAX_DEP-SEC_MOD_MIN);
-            glVertex3f(MAX*3, MIN+MOD_MIN, MAX_DEP-SEC_MOD_MIN);
-            glVertex3f(MAX*3, MIN+MOD_MIN, MIN_DEP+SEC_MOD_MIN);
-            glVertex3f(MAX*3, MAX-MOD_MIN, MIN_DEP+SEC_MOD_MIN);
-
-            glEnd();
-
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3f(MAX*1.5, ZERO+TER_MOD_MIN, MIN_DEP+MOD_MIN);
-            glVertex3f(MAX*1.5, ZERO+TER_MOD_MIN, MAX_DEP-MOD_MIN);
-            glVertex3f(MAX+MAX+MAX, ZERO+TER_MOD_MIN, MAX_DEP-MOD_MIN);
-            glVertex3f(MAX+MAX+MAX, ZERO+TER_MOD_MIN, MIN_DEP+MOD_MIN);
-
-            glEnd();
-
-            glBegin(GL_LINE_LOOP);
-
-            glVertex3f(MAX*1.5, ZERO-TER_MOD_MIN, MIN_DEP+MOD_MIN);
-            glVertex3f(MAX*1.5, ZERO-TER_MOD_MIN, MAX_DEP-MOD_MIN);
-            glVertex3f(MAX+MAX+MAX, ZERO-TER_MOD_MIN, MAX_DEP-MOD_MIN);
-            glVertex3f(MAX+MAX+MAX, ZERO-TER_MOD_MIN, MIN_DEP+MOD_MIN);
-
-            glEnd();
+            form_indices(m, 1);
+            glTranslatef(0.55,0,0);
+            form_indices(m, 1);
+            glTranslatef(-0.55,0,0);
+            glTranslatef(-0.55,0,0);
+            form_indices(m, 1);
+            glTranslatef(0.55,0,0);
 
             glPopMatrix();
 
             SwapBuffers(hDC);
 
-            theta += 1.0f;
+            theta += .0f;
             Sleep (1);
         }
     }
