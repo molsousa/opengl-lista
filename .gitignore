@@ -1,8 +1,8 @@
-.layout
-.cbp
-.depend
+*.layout
+*.cbp
+*.depend
 bin/
 obj/
-.exe
-.obj
-.o
+*.exe
+*.obj
+*.o
